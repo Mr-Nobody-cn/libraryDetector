@@ -1,0 +1,65 @@
+<!--pages/index/index.wxml-->
+<view class="head">
+  <image src="../img/out.jpg" mode="widthFix" class="out"></image>
+</view>
+
+<view class="title">
+  <view class="whiteblock">
+    占座情况监测
+  </view>
+</view>
+
+<view class="container">
+  <view class="box-1">
+    <view class="inner">
+      <view bindtap="chose1" class="inner-inner">
+        <image wx:if="{{!_occupied&&chosen != 1}}" src="../img/unoccupied-unchosen.png" class="image"></image>
+        <image wx:if="{{!_occupied&&chosen == 1}}" src="../img/unoccupied-chosen.png" class="image"></image>
+        <image wx:if="{{_occupied&&chosen != 1}}" src="../img/occupied-unchosen.png" class="image"></image>
+        <image wx:if="{{_occupied&&chosen == 1}}" src="../img/occupied-chosen.png" class="image"></image>
+      </view>
+      <view bindtap="chose2" class="inner-inner">
+        <image wx:if="{{chosen != 2}}" src="../img/undefined.png" class="image"></image>
+        <image wx:if="{{chosen == 2}}" src="../img/undefined-chosen.png" class="image"></image>
+      </view>
+      <view bindtap="chose3" class="inner-inner">
+        <image wx:if="{{chosen != 3}}" src="../img/undefined.png" class="image"></image>
+        <image wx:if="{{chosen == 3}}" src="../img/undefined-chosen.png" class="image"></image>
+      </view>
+    </view>
+    <view class="inner">
+      <view bindtap="chose4" class="inner-inner">
+        <image wx:if="{{chosen != 4}}" src="../img/undefined.png" class="image"></image>
+        <image wx:if="{{chosen == 4}}" src="../img/undefined-chosen.png" class="image"></image>
+      </view>
+      <view bindtap="chose5" class="inner-inner">
+        <image wx:if="{{chosen != 5}}" src="../img/undefined.png" class="image"></image>
+        <image wx:if="{{chosen == 5}}" src="../img/undefined-chosen.png" class="image"></image>
+      </view>
+      <view bindtap="chose6" class="inner-inner">
+        <image wx:if="{{chosen != 6}}" src="../img/undefined.png" class="image"></image>
+        <image wx:if="{{chosen == 6}}" src="../img/undefined-chosen.png" class="image"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="box-2">
+    >开启状态：{{_state}}
+  </view>
+
+  <view class="box-3">
+    >>占座状态：{{_occupied}}
+  </view>
+
+  <view class="box-4">
+    >>>计时情况：{{_timestamp}}mins
+  </view>
+</view>
+
+<view class="bar">
+  <button bindtap="unchose" style="width:29%;height:82%;margin-left: 28rpx;box-shadow: -6rpx 10rpx 2rpx 1rpx #1d273191;">取消</button>
+  <button bindtap="clear" style="width:29%;height:88%;;box-shadow: -6rpx 10rpx 2rpx 1rpx #1d273191">重置</button>
+  <button bindtap="back" style="width:29%;height:82%;margin-right: 28rpx;box-shadow: -6rpx 10rpx 2rpx 1rpx #1d273191;">返回</button>
+</view>
+
+<view class="bottom"></view>
