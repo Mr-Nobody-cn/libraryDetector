@@ -20,8 +20,6 @@ const char*  get_url = "https://images.bemfa.com/cloud/v1/get/";
 const char*  uid = "1823ec2d13e9d8c69b196d6822d8f17d";
 const char*  topic = "esp32CAM";
 
-String imageUrl = "";
-
 /*******************WiFi初始化函数*********************/
 bool init_wifi(){
   WiFi.mode(WIFI_STA);
@@ -49,10 +47,8 @@ void setup() {
   }
 }
 
-long int tatoltime=0;
-
 /*get图片url*/
-string geturl()
+void geturl()
 {
   HTTPClient http;
 
@@ -61,7 +57,8 @@ string geturl()
   Serial.print("[HTTP] GET...\n");
 
   int httpResponseCode=http.GET();
-  
+
+  char* imageUrl = "";
   if(httpResponseCode==200){
     //获取get请求后的服务器响应信息
     String response =http.getString();
@@ -73,26 +70,18 @@ string geturl()
     deserializeJson(doc, response);
     const char* status = doc["status"]; 
     long code = doc["code"]; 
-    const char* data_0_url = doc["data"][0]["url"]; 
-    const char* data_0_time = doc["data"][0]["time"]; 
-    Serial.println(data_0_url);
-
+    imageUrl  = doc["data"][0]["url"]; 
     http.end();
-
-    return data_0_url;
   }  
   else{
     Serial.println("Get failed.")
 
     http.end();
-
-    return "";
   }
-
 }
 
 /*物品识别*/
-String httpsObject(){
+bool httpsObject(){
   WiFiClientSecure httpsClient;
 
   Serial.println(host);
@@ -243,22 +232,20 @@ bool httpsHuman(){
   }
 }
 
-long int time = 0;
+long int times = 0;
 
 void loop() {
-  int passtime = millis()/1000;
-  imageUrl = geturl();
   if(imageUrl){
     bool bookExist = httpsObject();
-    bool humanExist = httpsPeople();
+    bool humanExist = httpsHuman();
     if(humanExist && bookExist){
-      time = time + 5;
+      times = times + 5;
     }
     else if(humanExist){
-      time = 0;
+      times = 0;
     } 
     //控制亮灯 
-    if(time >= 30*60*1000){
+    if(times >= 30*60*1000){
     digitalWrite(4,HIGH);
   }
   }
