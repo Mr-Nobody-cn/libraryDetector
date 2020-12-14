@@ -1,5 +1,4 @@
 # libraryDetector
-<br>
 Introductions for the code:<br>
 1.It contains two sections encluding a hardware part and a software part.<br>
 2.If you are from 'oursparkspace' you might have learned that our project consists three separate parts.So you can copy any of them separately without consern.<br>
